@@ -1,7 +1,4 @@
-module.exports = env => {
-  let config = require(`./webpack/webpack.${env}`)
-  // if (env === 'development') {
-  //   config = require(`./webpack/webpack.dev-${env}`)
-  // }
+module.exports = ({ env }) => {
+  const config = require(`./webpack/webpack.${env}.js`)
   return config;
 }

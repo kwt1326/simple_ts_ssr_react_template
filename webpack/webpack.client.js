@@ -1,17 +1,17 @@
+const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
-module.exports = target => ({
-  mode: devMode ? 'development' : 'production',
-  name: target,
-  target: 'node',
-  entry: './src/app.tsx',
+module.exports = ({
+  mode: process.env.NODE_ENV || 'development',
+  name: 'client',
+  target: 'web',
+  entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, `dist/${target}`),
-    filename: '[name].js',
+    path: path.resolve(__dirname, '../dist/web'),
+    filename: 'client-bundle.js',
     publicPath: '/web/',
-    libraryTarget: target === 'node' ? 'commonjs2' : undefined,
   },
   module: {
     rules: [
@@ -19,7 +19,12 @@ module.exports = target => ({
         test: /\.tsx?$/,
         use: [
           'babel-loader',
-          'ts-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true
+            },
+          }
         ],
       },
       {

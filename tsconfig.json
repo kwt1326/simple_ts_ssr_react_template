@@ -1,37 +1,37 @@
 {
 	"compilerOptions": {
-		// Target latest version of ECMAScript.
+	// 	// Target latest version of ECMAScript.
+	// 	"target": "esnext",		
+	// 	"module": "esnext",
+	// 	"jsx": "preserve",
+		
+	// 	// Search under node_modules for non-relative imports.
+	// 	"moduleResolution": "node",
+	// 	"baseUrl": "./src",
+	// 	// "noImplicitAny": true,
+	// 	// "strictNullChecks": true,
+
+	// 	// Process & infer types from .js files.
+	// 	"allowJs": true,
+	// 	// Don't emit; allow Babel to transform files.
+	// 	"noEmit": true,
+	// 	// Enable strictest settings like strictNullChecks & noImplicitAny.
+	// 	"strict": true,
+	// 	// Disallow features that require cross-file information for emit.
+	// 	"isolatedModules": true,
+	// 	// Import non-ES modules as default imports.
+	// 	"esModuleInterop": true
+	// },
+	// "exclude": [
+	// 	"node_modules",
+  //   "**/*.test.*"
+	// ]
 		"target": "esnext",
-		
 		"module": "esnext",
-
-		"jsx": "preserve",
-		
-		// Search under node_modules for non-relative imports.
+		"noImplicitAny": true,
+		"removeComments": true,
 		"moduleResolution": "node",
-
-		"baseUrl": "./",
-		
-		// "noImplicitAny": true,
-
-		// "strictNullChecks": true,
-
-		// Process & infer types from .js files.
-		"allowJs": true,
-		// Don't emit; allow Babel to transform files.
-		"noEmit": true,
-		// Enable strictest settings like strictNullChecks & noImplicitAny.
-		"strict": true,
-		// Disallow features that require cross-file information for emit.
-		"isolatedModules": true,
-		// Import non-ES modules as default imports.
-		"esModuleInterop": true
-	},
-	"include": [
-		"src/**/*"
-	],
-	"exclude": [
-		"node_modules",
-    "**/*.test.*"
-  ]
+		"jsx": "react",
+		"baseUrl": "./src",
+	}
 }
