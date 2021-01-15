@@ -5,13 +5,12 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const WebpackChunkHash = require('webpack-chunk-hash');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
-
 const config = {
   mode: process.env.NODE_ENV || 'development',
   name: 'server',
   target: 'node',
   node: false,
-  entry: './server/index.tsx',
+  entry: path.resolve(__dirname, '/src/server/index.tsx'),
   output: {
     path: path.resolve(__dirname, '../dist/server'),
     filename: 'server-bundle.js',
@@ -20,7 +19,7 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(js|ts|tsx)?$/,
         use: [
           'babel-loader',
           {
@@ -36,6 +35,7 @@ const config = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    modules: ['src', 'node_modules'],
   },
   optimization: {
     minimize: true,

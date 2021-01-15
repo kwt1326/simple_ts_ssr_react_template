@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/server";
-import * as Express from "express";
+import Express from "express";
 import * as Redux from "redux";
 import { Helmet } from 'react-helmet';
 import { Provider as ReduxProvider } from "react-redux";
 import { StaticRouter as Router } from "react-router-dom";
 
-import App from "../src/pages/app";
-import reducer from "../src/store/reducers/menuReducer";
+import App from "../pages/app";
+import reducer from "../store/reducers/menuReducer";
 
 declare const module: any;
 
@@ -16,7 +16,7 @@ const port = 3000;
 
 express.use(Express.static("build"));
 
-express.get("/*", (req, res, next) => {
+express.get("/*", (req: { path: string | object; }, res: { send: (arg0: string) => void; end: () => void; }, next: () => void) => {
   const helmet = Helmet.renderStatic();
   const store = Redux.createStore(reducer);
   const renderHTML = ReactDOM.renderToString(

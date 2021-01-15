@@ -1,14 +1,6 @@
-function isWebTarget(caller) {
-  return Boolean(caller && caller.target === 'web');
-}
-
-function isWebpack(caller) {
-  return Boolean(caller && caller.name === 'babel-loader');
-}
-
 module.exports = api => {
-  const web = api.caller(isWebTarget);
-  const webpack = api.caller(isWebpack);
+  const web = api.caller((caller) => { return Boolean(caller && caller.target === 'web') });
+  const webpack = api.caller((caller) => { return Boolean(caller && caller.target === 'babel-loader') });
 
   api.cache(true);
 
@@ -27,7 +19,8 @@ module.exports = api => {
     ],
     plugins: [
       "@babel/proposal-class-properties",
-      "@babel/proposal-object-rest-spread"
+      "@babel/proposal-object-rest-spread",
+      "@babel/plugin-syntax-dynamic-import"
     ]
   }
 }

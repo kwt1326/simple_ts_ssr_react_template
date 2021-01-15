@@ -1,37 +1,37 @@
 {
-	"compilerOptions": {
-	// 	// Target latest version of ECMAScript.
-	// 	"target": "esnext",		
-	// 	"module": "esnext",
-	// 	"jsx": "preserve",
-		
-	// 	// Search under node_modules for non-relative imports.
-	// 	"moduleResolution": "node",
-	// 	"baseUrl": "./src",
-	// 	// "noImplicitAny": true,
-	// 	// "strictNullChecks": true,
-
-	// 	// Process & infer types from .js files.
-	// 	"allowJs": true,
-	// 	// Don't emit; allow Babel to transform files.
-	// 	"noEmit": true,
-	// 	// Enable strictest settings like strictNullChecks & noImplicitAny.
-	// 	"strict": true,
-	// 	// Disallow features that require cross-file information for emit.
-	// 	"isolatedModules": true,
-	// 	// Import non-ES modules as default imports.
-	// 	"esModuleInterop": true
-	// },
-	// "exclude": [
-	// 	"node_modules",
-  //   "**/*.test.*"
-	// ]
-		"target": "esnext",
-		"module": "esnext",
-		"noImplicitAny": true,
-		"removeComments": true,
-		"moduleResolution": "node",
-		"jsx": "react",
-		"baseUrl": "./src",
-	}
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "jsx": "react",
+    "lib": [
+      "es2015", "es6", "esnext", "dom"
+    ],
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+		// "sourceMap": true,
+    // "allowJs": true,
+    // "skipLibCheck": true,
+    // "strict": false,
+    // "forceConsistentCasingInFileNames": true,
+    // "noEmit": true,
+    // "esModuleInterop": true,
+    // "resolveJsonModule": true,
+    // "isolatedModules": false
+    "paths": {
+      "components/*": ["./src/components/*"],
+      "pages/*": ["./src/pages/*"],
+      "server/*": ["./src/server/*"],
+      "store/*": ["./src/store/*"]
+    },
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

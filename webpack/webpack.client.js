@@ -7,7 +7,7 @@ module.exports = ({
   mode: process.env.NODE_ENV || 'development',
   name: 'client',
   target: 'web',
-  entry: './src/index.tsx',
+  entry: path.resolve(__dirname, '/src/index.tsx'),
   output: {
     path: path.resolve(__dirname, '../dist/web'),
     filename: 'client-bundle.js',
@@ -16,7 +16,7 @@ module.exports = ({
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(js|ts|tsx)?$/,
         use: [
           'babel-loader',
           {
@@ -26,6 +26,7 @@ module.exports = ({
             },
           }
         ],
+        exclude: /node_modules/,
       },
       {
         test: /\.(scss|css)$/,
@@ -39,6 +40,7 @@ module.exports = ({
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    modules: ['src', 'node_modules'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
