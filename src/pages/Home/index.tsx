@@ -2,7 +2,10 @@ import * as React from 'react';
 
 const Home = (props: any) => {
   return (
-    <h3>Hello World !</h3>
+    <React.Fragment>
+      <h3>Hello World !</h3>
+      {/* <p>{props}</p> */}
+    </React.Fragment>
   )
 }
 
