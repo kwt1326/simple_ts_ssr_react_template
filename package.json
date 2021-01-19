@@ -2,10 +2,9 @@
   "name": "front-end",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server/server-bundle.js",
   "scripts": {
-    "start": "npm run build:dev && ts-node src/server/index.tsx",
-    "start-dev": "npm run build:dev && nodemon --exec ts-node src/server/index.tsx",
+    "start": "npm run build:dev && ts-node dist/server-bundle.js",
+    "start-dev": "NODE_ENV=development webpack && nodemon --exec ts-node dist/server-bundle.js",
     "build:prod": "NODE_ENV=production npm run build:prod-client && NODE_ENV=production npm run build:prod-server",
     "build:dev": "NODE_ENV=development npm run build:client && NODE_ENV=development npm run build:server",
     "build:server": "webpack --config webpack/webpack.server.js --env env=server",

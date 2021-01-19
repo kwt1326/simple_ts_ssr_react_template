@@ -9,10 +9,9 @@ const config = {
   mode: process.env.NODE_ENV || 'development',
   name: 'server',
   target: 'node',
-  node: false,
   entry: path.resolve(__dirname, '/src/server/index.tsx'),
   output: {
-    path: path.resolve(__dirname, '../dist/server'),
+    path: path.resolve(__dirname, '../dist'),
     filename: 'server-bundle.js',
     chunkFilename: '[name].js',
   },

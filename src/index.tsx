@@ -15,7 +15,10 @@ const store = Redux.createStore(reducer, preloadedState);
 ReactDOM.hydrate(
   <ReduxProvider store={store}>
     <Router>
-      <App />
+      <React.Fragment>
+        <App />
+        <div>client</div>
+      </React.Fragment>
     </Router>
   </ReduxProvider>,
   document.getElementById("root")
