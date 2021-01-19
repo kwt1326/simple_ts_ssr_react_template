@@ -17,7 +17,7 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get("/*", (req: { path: string | object; }, res: { send: (arg0: string) => void; end: () => void; }, next: () => void) => {
+app.get("*", (req: { path: string | object; }, res: { send: (arg0: string) => void; end: () => void; }, next: () => void) => {
   const helmet = Helmet.renderStatic();
   const store = Redux.createStore(reducer);
   const renderHTML = ReactDOM.renderToString(
@@ -51,17 +51,14 @@ app.get("/*", (req: { path: string | object; }, res: { send: (arg0: string) => v
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <meta name="google" content="notranslate">
         ${helmet.title.toString()}
+        <script>window.__PRELOADED_STATE__=${JSON.stringify(initState)};</script>
       </head>
       <body>
         <div id="root">${renderHTML}</div>
-        <script>
-            window["__PRELOADED_STATE__"] = ${initState}
-        </script>
-        <script type="application/javascript" src="client-bundle.js"></script>
+        <script src="client-bundle.js"></script>
       </body>
     </html>
   `);
-  res.end();
   next();
 });
 
