@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/server";
-import Express from "express";
 import * as Redux from "redux";
+import express from "express";
+import path from "path";
 import { Helmet } from 'react-helmet';
 import { Provider as ReduxProvider } from "react-redux";
 import { StaticRouter as Router } from "react-router-dom";
@@ -11,18 +12,19 @@ import reducer from "../store/reducers/menuReducer";
 
 declare const module: any;
 
-const express = Express();
+const app = express();
 const port = 3000;
 
-express.use(Express.static("build"));
+app.use(express.static(path.join(__dirname, '../dist')));
 
-express.get("/*", (req: { path: string | object; }, res: { send: (arg0: string) => void; end: () => void; }, next: () => void) => {
+app.get("*", (req: { path: string | object; }, res: { send: (arg0: string) => void; end: () => void; }, next: () => void) => {
   const helmet = Helmet.renderStatic();
   const store = Redux.createStore(reducer);
   const renderHTML = ReactDOM.renderToString(
     <ReduxProvider store={store}>
       <Router location={req.path} context={{}}>
         <App />
+        <div>server</div>
       </Router>
     </ReduxProvider>
   );
@@ -47,21 +49,18 @@ express.get("/*", (req: { path: string | object; }, res: { send: (arg0: string) 
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <meta name="google" content="notranslate">
         ${helmet.title.toString()}
+        <script>window.__PRELOADED_STATE__=${JSON.stringify(initState)};</script>
       </head>
       <body>
-        <main id="root">${renderHTML}</main>
-        <script>
-            window["__PRELOADED_STATE__"] = ${initState}
-        </script>
-        <script type="application/javascript" src="client-bundle.js"></script>
+        <div id="root">${renderHTML}</div>
+        <script src="client-bundle.js"></script>
       </body>
     </html>
   `);
-  res.end();
   next();
 });
 
-const server = express.listen(port);
+const server = app.listen(port);
 
 if (module.hot) {
   module.hot.accept();

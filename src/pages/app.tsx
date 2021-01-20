@@ -3,12 +3,13 @@ import { Switch, Route } from "react-router-dom";
 
 import Home from "./Home";
 
-export default class App extends React.Component {
-  public render() {
-    return (
-      <Switch>
-        <Route exact path="/" component={Home} />
-      </Switch>
-    );
-  }
+const App = (props: any) => {
+  console.log(props)
+  return (
+    <Switch>
+      <Route exact path="/" component={Home} />
+    </Switch>
+  );
 }
+
+export default App

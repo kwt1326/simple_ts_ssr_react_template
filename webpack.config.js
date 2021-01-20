@@ -1,4 +1,4 @@
-module.exports = ({ env }) => {
-  const config = require(`./webpack/webpack.${env}.js`)
-  return config;
-}
+const webpackClientConfig = require('./webpack/webpack.client');
+const webpackServerConfig = require('./webpack/webpack.server');
+
+module.exports = [webpackClientConfig, webpackServerConfig]
