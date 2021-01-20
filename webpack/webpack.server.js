@@ -20,7 +20,7 @@ const config = {
       {
         test: /\.(js|ts|tsx)?$/,
         use: [
-          'babel-loader',
+          //'babel-loader',
           {
             loader: 'ts-loader',
             options: {
@@ -44,6 +44,13 @@ const config = {
   },
   externals: [nodeExternals()],
 };
+
+if (process.env.NODE_ENV === 'development') {
+  config.devServer = {
+    contentBase: path.resolve(__dirname, '../dist'),
+    hot: true,
+  }
+}
 
 if (process.env.NODE_ENV === 'production') {
   config.output.filename = '[name].[chunkhash].js';

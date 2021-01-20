@@ -18,6 +18,8 @@ module.exports = api => {
       ],
     ],
     plugins: [
+      '@babel/plugin-transform-runtime',
+      ['@babel/plugin-proposal-decorators', { legacy: true }],
       "@babel/proposal-class-properties",
       "@babel/proposal-object-rest-spread",
       "@babel/plugin-syntax-dynamic-import"

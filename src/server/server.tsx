@@ -23,10 +23,8 @@ app.get("*", (req: { path: string | object; }, res: { send: (arg0: string) => vo
   const renderHTML = ReactDOM.renderToString(
     <ReduxProvider store={store}>
       <Router location={req.path} context={{}}>
-        <React.Fragment>
-          <App />
-          <div>server</div>
-        </React.Fragment>
+        <App />
+        <div>server</div>
       </Router>
     </ReduxProvider>
   );
