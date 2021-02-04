@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const WebpackChunkHash = require('webpack-chunk-hash');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
   mode: process.env.NODE_ENV || 'development',
@@ -18,6 +19,38 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(sass|scss|css)$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+                exportOnlyLocals: true,
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDev
+            }
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|ico)$/,
+        use: [
+         {
+          loader: 'url-loader',
+          options: {
+           useRelativePath: true,
+           limit: 10000
+          }
+         }
+        ]
+      },
+      {
         test: /\.(js|ts|tsx)?$/,
         use: [
           //'babel-loader',
@@ -29,11 +62,11 @@ const config = {
           }
         ],
         exclude: /node_modules/,
-      },
+      }
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', ".css", ".scss"],
     modules: ['src', 'node_modules'],
   },
   optimization: {
@@ -42,20 +75,14 @@ const config = {
       include: /\.min\.js$/
     })]
   },
+  plugins: [],
   externals: [nodeExternals()],
 };
-
-if (process.env.NODE_ENV === 'development') {
-  config.devServer = {
-    contentBase: path.resolve(__dirname, '../dist'),
-    hot: true,
-  }
-}
 
 if (process.env.NODE_ENV === 'production') {
   config.output.filename = '[name].[chunkhash].js';
   config.plugins = [
-    ...config.plugins, // ES6 array destructuring, available in Node 5+
+    ...config.plugins,
     new webpack.HashedModuleIdsPlugin(),
     new WebpackChunkHash(),
     new ChunkManifestPlugin({
