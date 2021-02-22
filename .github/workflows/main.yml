@@ -2,7 +2,10 @@ name: decrypt_enviroment
 
 on:
   push:
-
+    branches:
+      - main
+      - develop
+      
 jobs:
   decrypt_enviroment:
     name: decrypt env
