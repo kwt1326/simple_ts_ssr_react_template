@@ -1,0 +1,15 @@
+name: decrypt_enviroment
+
+on:
+  push:
+
+jobs:
+  decrypt_enviroment:
+    name: decrypt env
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Decrypt env.json.gpg
+        run: ./decryptenv.sh
+        env:
+          ENV_DECRYPE_PW: ${{ secrets.TEST_SECRET_VALUE }}
