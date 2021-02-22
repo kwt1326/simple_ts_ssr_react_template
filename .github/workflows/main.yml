@@ -16,3 +16,5 @@ jobs:
         run: ./decryptenv.sh
         env:
           TEST_SECRET_VALUE: ${{ secrets.TEST_SECRET_VALUE }}
+      - name: Test printing your secret (Remove this step in production)
+        run: cat $HOME/env/env.js
