@@ -15,4 +15,4 @@ jobs:
       - name: Decrypt env.json.gpg
         run: ./decryptenv.sh
         env:
-          ENV_DECRYPE_PW: ${{ secrets.TEST_SECRET_VALUE }}
+          TEST_SECRET_VALUE: ${{ secrets.TEST_SECRET_VALUE }}
