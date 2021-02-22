@@ -3,6 +3,9 @@ import * as ReactDOM from "react-dom/server";
 import * as Redux from "redux";
 import express from "express";
 import path from "path";
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import { Helmet } from 'react-helmet';
 import { Provider as ReduxProvider } from "react-redux";
 import { StaticRouter as Router } from "react-router-dom";
@@ -12,10 +15,16 @@ import reducer from "../store/reducers/menuReducer";
 
 declare const module: any;
 
+const clientConfig = require('../../webpack/webpack.client.js');
+const serverConfig = require('../../webpack/webpack.server.js');
+
 const app = express();
 const port = 3000;
+const compiler = webpack([clientConfig, serverConfig]);
 
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use(webpackDevMiddleware(compiler.compilers[0]))
+app.use(webpackHotMiddleware(compiler))
 
 app.get("*", (req: { path: string | object; }, res: { send: (arg0: string) => void; end: () => void; }, next: () => void) => {
   const helmet = Helmet.renderStatic();
@@ -24,7 +33,6 @@ app.get("*", (req: { path: string | object; }, res: { send: (arg0: string) => vo
     <ReduxProvider store={store}>
       <Router location={req.path} context={{}}>
         <App />
-        <div>server</div>
       </Router>
     </ReduxProvider>
   );
@@ -62,7 +70,7 @@ app.get("*", (req: { path: string | object; }, res: { send: (arg0: string) => vo
 
 const server = app.listen(port);
 
-if (module.hot) {
-  module.hot.accept();
-  module.hot.dispose(() => server.close());
-}
+// if (module.hot) {
+//   module.hot.accept();
+//   module.hot.dispose(() => server.close());
+// }

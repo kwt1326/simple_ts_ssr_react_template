@@ -17,7 +17,6 @@ const render = (Component: any) => {
     <ReduxProvider store={store}>
       <Router>
         <Component />
-        <div>client</div>
       </Router>
     </ReduxProvider>,
     document.getElementById("root")
@@ -27,8 +26,7 @@ const render = (Component: any) => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./pages/app.tsx', () => {
-    const appRoot = require('./pages/app.tsx').default;
-    render(appRoot);
+  module.hot.accept((err) => {
+    console.log(err)
   });
 }
