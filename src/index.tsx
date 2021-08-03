@@ -1,32 +1,9 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import * as Redux from "redux";
-import { Provider as ReduxProvider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./app";
 
-import App from "./pages/app";
-import reducer from "./store/reducers/menuReducer";
+ReactDOM.hydrate(<App />, document.getElementById('react-root'));
 
-const preloadedState = (window as any)["__PRELOADED_STATE__"];
-delete (window as any)["__PRELOADED_STATE__"];
-
-const store = Redux.createStore(reducer, JSON.parse(preloadedState));
-
-const render = (Component: any) => {
-  ReactDOM.hydrate(
-    <ReduxProvider store={store}>
-      <Router>
-        <Component />
-      </Router>
-    </ReduxProvider>,
-    document.getElementById("root")
-  );
-}
-
-render(App);
-
-if (module.hot) {
-  module.hot.accept((err) => {
-    console.log(err)
-  });
+if (module['hot']) {
+  module['hot'].accept('./app.tsx', () => { console.log('[Development] Enable Hot Module Reload!') })
 }
