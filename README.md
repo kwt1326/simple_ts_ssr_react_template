@@ -1,2 +1,2 @@
 # simple_ts_ssr_react_template
-Webpack 4 / Express SSR / typescript / React / Dart-Sass
+Webpack 5 / React / Express(SSR server) / typescript / Dart-Sass

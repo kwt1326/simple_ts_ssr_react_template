@@ -12,7 +12,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackClientConfig = require('../config/webpack.client.config.js');
 const webpackServerConfig = require('../config/webpack.server.config.js');
 
-const server = express()
+const server = express();
 const port = process.env.PORT;
 const env = process.env.NODE_ENV;
 

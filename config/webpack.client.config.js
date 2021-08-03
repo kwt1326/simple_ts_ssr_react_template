@@ -70,11 +70,6 @@ if (env === 'development') {
         path.resolve(__dirname, '../src/index.tsx'),
       ]
     },
-    devServer: {
-      contentBase: "dist",
-      hot: true,
-      stats: { colors: true }
-    },
     output: {
       ...config.output,
       filename: '[name].js', // hash 제거

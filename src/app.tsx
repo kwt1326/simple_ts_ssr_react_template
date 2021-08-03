@@ -4,7 +4,7 @@ import Home from './Home';
 export default function App() {
   return (
     <div>
-      test1
+      test12345678
       <Home />
     </div>
   )
