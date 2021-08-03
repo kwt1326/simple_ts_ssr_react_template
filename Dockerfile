@@ -3,4 +3,4 @@ WORKDIR /app
 COPY . /app
 RUN rm -rf node_modules
 RUN npm install
-RUN npm run build:prod
+RUN npm run prod:start
